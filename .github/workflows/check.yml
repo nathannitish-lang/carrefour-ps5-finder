@@ -1,3 +1,4 @@
+
 name: Carrefour PS5 Finder
 
 on:
@@ -6,14 +7,22 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+
     steps:
       - name: Recuperer les fichiers
         uses: actions/checkout@v4
+
       - name: Installer Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Installer les dependances
         run: pip install -r requirements.txt
+
+      - name: Installer Chromium
+        run: python -m playwright install --with-deps chromium
+
       - name: Lancer le scanner
         run: python scanner.py
+  
